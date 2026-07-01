@@ -7,6 +7,8 @@
 
 它不會刪信。`archive: true` 只代表「移出收件匣」，信仍然會留在 All Mail 和對應標籤裡。
 
+當信件被這套規則套上自定義分類標籤時，程式也會移除來源標籤 `最新快訊`。如果 Gmail UI 的 `最新快訊` 實際上是系統分類，程式會移除 API label id `CATEGORY_UPDATES`。
+
 ## 檔案
 
 - `Code.gs`：分類規則與執行程式。
@@ -29,7 +31,27 @@
 - `runBackfill7Days()`：補分類最近 7 天仍在收件匣的信。
 - `runBackfill30Days()`：補分類最近 30 天仍在收件匣的信。
 - `runHourlyClassifier()`：手動跑一次每小時掃描。
+- `archiveInboxWithArchiveLabels()`：把已經有可封存標籤、但仍留在收件匣的信移出收件匣。
 - `deleteClassifierTriggers()`：停止每小時掃描。
+
+## 已經有標籤的信
+
+`runHourlyClassifier()`、`runBackfill7Days()` 和 `runBackfill30Days()` 會先依規則分類，再執行 `archiveInboxWithArchiveLabels()`。
+
+目前會依既有標籤自動移出收件匣的標籤是：
+
+- `Finance`
+- `Finance/Bills`
+- `Finance/Receipts`
+- `Finance/Investment`
+- `Finance/Insurance`
+- `Learning/Business`
+- `Learning/Reading`
+- `Purchases/Promotions`
+- `Subscriptions`
+- `Personal`
+
+我刻意沒有把 `00_Action`、`Work`、`Travel`、`Career`、`Learning/Tech`、`Purchases/Orders` 放進去，因為這些比較可能代表還需要看、回覆、追蹤或確認狀態。
 
 ## 調整規則
 
@@ -50,6 +72,8 @@
 - `archive: true`：套標籤後移出收件匣。
 - `archive: false`：保留在收件匣，適合需要注意或可能要回覆的信。
 - `queries`：Gmail 搜尋語法。每一條 query 會建立一個 filter，也會被每小時掃描使用。
+
+如果還有其他舊的使用者標籤想在分類後移除，可以加到 `SOURCE_LABEL_NAMES_TO_REMOVE`。如果是 Gmail 系統分類，則加到 `SOURCE_SYSTEM_LABEL_IDS_TO_REMOVE`。
 
 ## Promotions 全自動封存
 
