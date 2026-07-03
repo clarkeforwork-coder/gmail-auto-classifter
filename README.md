@@ -53,6 +53,8 @@
 
 我刻意沒有把 `00_Action`、`Work`、`Travel`、`Career`、`Learning/Tech`、`Purchases/Orders` 放進去，因為這些比較可能代表還需要看、回覆、追蹤或確認狀態。
 
+另外，只要信件帶有 `00_Action`，`archiveInboxWithArchiveLabels()` 就不會自動移出收件匣。這用來保護像銀行消費彙整、繳款提醒這類「要分類，但仍應留在收件匣確認」的信。
+
 ## 調整規則
 
 每個分類規則都在 `RULES` 裡：

@@ -62,6 +62,10 @@ const ARCHIVE_EXISTING_LABELS = [
   'Personal'
 ];
 
+const ARCHIVE_PROTECTED_LABELS = [
+  '00_Action'
+];
+
 const SOURCE_LABEL_NAMES_TO_REMOVE = [
   '最新快訊'
 ];
@@ -127,6 +131,7 @@ const RULES = [
       'from:isafe.osha@ms2ap.osha.gov.tw',
       'from:KLM@klm-info.com subject:"personal data"',
       'from:ESUNCARD@email.esunbank.com.tw subject:"重新註冊"',
+      'from:webservice@cathaybk.com.tw subject:"CUBE App登入成功通知"',
       'from:no-reply@pitch.com subject:"temporary Pitch log-in code"',
       'from:security-noreply@linkedin.com',
       'from:no-reply@todoist.com subject:"刪除帳戶"'
@@ -257,6 +262,23 @@ const RULES = [
     ]
   },
   {
+    name: 'Finance receipts - keep visible',
+    labels: ['Finance/Receipts', '00_Action/Review'],
+    archive: false,
+    queries: [
+      'from:service@pxbillrc01.cathaybk.com.tw subject:"消費彙整通知"',
+      'from:service@pxbillrc01.cathaybk.com.tw subject:"CUBE App轉帳通知"'
+    ]
+  },
+  {
+    name: 'Finance investment - keep visible',
+    labels: ['Finance/Investment', '00_Action/Review'],
+    archive: false,
+    queries: [
+      'from:esunnotify@bhcr.esunsec.com.tw subject:"綜合月對帳單"'
+    ]
+  },
+  {
     name: 'Finance bills',
     labels: ['Finance/Bills'],
     archive: true,
@@ -331,7 +353,13 @@ const RULES = [
       'from:Service@msg.esunbank.com',
       'from:btschool@myteachify.com',
       'from:mailservice.edm001@wantgoo.com',
-      'from:blocktrend@substack.com'
+      'from:blocktrend@substack.com',
+      'from:enews@newmx.cnyes.com',
+      'from:service@news.mybank.com.tw subject:"國民經濟信心問卷"',
+      'from:esunmkt@mhcr.esunsec.com.tw',
+      'from:esun@esunsec.com.tw',
+      'from:service@edm2.cathaysec.com.tw',
+      'from:service@mailhunter.feib.com.tw'
     ]
   },
   {
@@ -388,7 +416,13 @@ const RULES = [
       'from:CloudPlatform-noreply@google.com subject:"Cloud Billing user survey"',
       'from:tces@mail.ems.ithome.com.tw',
       'from:cst@mail.ems.ithome.com.tw',
-      'from:attendee@coscup.org'
+      'from:attendee@coscup.org',
+      'from:bneditor@bnext.com.tw',
+      'from:noreply@medium.com',
+      'from:ithelp@mail.ems.ithome.com.tw',
+      'from:bytebytego@substack.com',
+      'from:newsletter@thehackernews.com',
+      'from:news@news.nl00.net'
     ]
   },
   {
@@ -418,7 +452,13 @@ const RULES = [
       'from:JunMoney@f.stanmail.io',
       'from:JunMoney@e.stanmail.io',
       'from:orders@stan.store',
-      'from:ms.s_at_web3careercoach_com_kzc4dhcfkr7fmq_66gc1236@icloud.com'
+      'from:ms.s_at_web3careercoach_com_kzc4dhcfkr7fmq_66gc1236@icloud.com',
+      'from:bnevent@bnext.com.tw',
+      'from:publishing@email.mckinsey.com',
+      'from:peteryang+essays@substack.com',
+      'from:lenny@substack.com',
+      'from:sub1@cw.com.tw',
+      'from:cwlearning@cw.com.tw'
     ]
   },
   {
@@ -431,7 +471,11 @@ const RULES = [
       'from:hello@e.faithera.com',
       'from:customer@faithera.com',
       'from:jessie@theoutsiderstory.com',
-      'from:english-quora-digest@quora.com'
+      'from:english-quora-digest@quora.com',
+      'from:cwdaily@cw.com.tw',
+      'from:ReadersDigest@mail.rd.com',
+      'from:TheHealthy@mail.thehealthy.com',
+      'from:newsletters-noreply@linkedin.com'
     ]
   },
   {
@@ -455,7 +499,11 @@ const RULES = [
       'from:talentcommunity@asml.com',
       'from:jobs-listings@linkedin.com',
       'from:jobalerts-noreply@linkedin.com',
+      'from:jobs-noreply@linkedin.com',
       'from:messages-noreply@linkedin.com',
+      'from:invitations@linkedin.com',
+      'from:linkedin@em.linkedin.com subject:Premium',
+      'from:supermicrocomputer-jobnotification@noreply.jobs2web.com',
       'from:Carol.Chen@adecco.com',
       'from:Gina.Chen@dellteam.com',
       'from:Joy.Zhang2@dellteam.com',
@@ -513,7 +561,12 @@ const RULES = [
       'from:no-reply@agoda.com subject:recommend',
       'from:no-reply@west-qr.com subject:"註冊完成"',
       'from:TW_HTL_NoReply@trip.com',
-      'from:info@travelinvoice.com.tw'
+      'from:info@travelinvoice.com.tw',
+      'from:eservice@mh1.evaair.com',
+      'from:no-reply@e.cathaypacific.com',
+      'from:no-reply@sg.newsletter.agoda-emails.com',
+      'from:no-reply@rlx.jp',
+      'from:noreply@notification.tigerairtw.com'
     ]
   },
   {
@@ -579,6 +632,19 @@ const RULES = [
       'from:system@91app.com',
       'from:support@buyandship.com.tw',
       'from:info@aholiclaces.com',
+      'from:haku-clothing@rococoweb.com',
+      'from:contact@mailer.humblebundle.com',
+      'from:info@store.united-arrows.tw',
+      'from:nintendo-noreply@ccg.nintendo.com',
+      'from:donotreply@zeczec.com',
+      'from:service@plain-me.com',
+      'from:noreply@member.catchplay.com',
+      'from:donotreply@newsletter.rockstargames.com',
+      'from:newsletter@email3.gog.com',
+      'from:news@supremenewyork.com',
+      'from:news@shop.kobo.com',
+      'from:news@shopjp.kobo.com',
+      'from:email@edm.uniqlo.tw',
       'from:shoppingsc@pchome.com.tw subject:"中獎通知"',
       'from:uber@uber.com',
       'from:sega@email.segaamerica.com',
@@ -624,7 +690,8 @@ const RULES = [
       'from:noreply@umail.accounts.riotgames.com subject:"Terms of Service"',
       'from:noreply@umail.accounts.riotgames.com subject:服務條款',
       'from:noreply@mail.accounts.riotgames.com subject:"Terms of Service"',
-      'from:noreply@mail.accounts.riotgames.com subject:服務條款'
+      'from:noreply@mail.accounts.riotgames.com subject:服務條款',
+      'from:no-reply@mail.instagram.com'
     ]
   },
   {
@@ -727,7 +794,13 @@ function archiveInboxWithArchiveLabels() {
   let archivedThreads = 0;
 
   ARCHIVE_EXISTING_LABELS.forEach(function(labelName) {
-    const searchQuery = 'in:inbox -in:spam -in:trash label:' + quoteSearchValue_(labelName);
+    const searchQuery = [
+      'in:inbox',
+      '-in:spam',
+      '-in:trash',
+      archiveProtectedLabelExclusions_(),
+      'label:' + quoteSearchValue_(labelName)
+    ].filter(Boolean).join(' ');
 
     for (let batch = 0; batch < CONFIG.MAX_LABEL_ARCHIVE_BATCHES; batch += 1) {
       let threads = [];
@@ -902,6 +975,12 @@ function expandLabelNames_(labelNames) {
 
 function quoteSearchValue_(value) {
   return '"' + String(value).replace(/"/g, '\\"') + '"';
+}
+
+function archiveProtectedLabelExclusions_() {
+  return ARCHIVE_PROTECTED_LABELS.map(function(labelName) {
+    return '-label:' + quoteSearchValue_(labelName);
+  }).join(' ');
 }
 
 function activeRules_() {
